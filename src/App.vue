@@ -3,7 +3,10 @@
   <div class="container">
     <Balance :total="total" />
     <IncomeExpense :income="income" :expense="expense" />
-    <TransactionList :transactions="transactions" />
+    <TransactionList
+      :transactions="transactions"
+      @deleteTransaction="handleDeleteTransaction"
+    />
     <AddTransaction @addTransaction="handleSubmit" />
   </div>
 </template>
@@ -57,5 +60,12 @@ const handleSubmit = (newTransaction) => {
   transactions.value = [...transactions.value, newTransaction];
 
   toast.success("Transaction added");
+};
+
+// Handle Delete Transaction
+const handleDeleteTransaction = (id) => {
+  transactions.value = transactions.value.filter((t) => t.id !== id);
+
+  toast.success("Transaction deleted");
 };
 </script>
