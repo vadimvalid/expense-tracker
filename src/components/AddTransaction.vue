@@ -33,15 +33,15 @@ const emit = defineEmits(["add-transaction"]);
 const onSubmit = () => {
   if (!text.value || !amount.value) {
     toast.error("Both fields must be filled");
+  } else {
+    const newTransaction = {
+      id: Math.floor(Math.random() * 100000000),
+      text: text.value,
+      amount: +amount.value,
+    };
+
+    emit("add-transaction", newTransaction);
   }
-
-  const newTransaction = {
-    id: Math.floor(Math.random() * 100000000),
-    text: text.value,
-    amount: +amount.value,
-  };
-
-  emit("add-transaction", newTransaction);
 
   text.value = "";
   amount.value = "";
